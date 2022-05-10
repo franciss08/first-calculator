@@ -15,6 +15,7 @@ button {
     width: 80px;
     border-radius: 5px;
     font-size: 40px;
+    cursor: pointer;
 }
 
 .number {
