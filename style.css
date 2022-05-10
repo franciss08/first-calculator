@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+table {
+    font-family: monospace;
+    width: 350px;
+    font-size: 40px;
+}
+
+button {
+    font-family: monospace;
+    width: 80px;
+    border-radius: 5px;
+    font-size: 40px;
+}
+
+.number {
+    color:azure;
+    background-color: darkslategrey;
+}
+
+.operation {
+    color:azure;
+    background-color: coral;
+}
+
+#equals , #AC {
+    background-color: azure;
+    color: darkslategrey;
+}
+
+#display {
+    text-align: right;
+    border: solid 2px black;
+    border-radius: 5px;
+    background-color: darkgray;
+}
