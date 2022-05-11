@@ -3,6 +3,7 @@ let firstNumber = '0';
 let operation = 'none';
 let lastPressType = 'AC';
 let storedAnswer;
+let repeatEqualsModifier;
 
 let display = document.getElementById('display');
 
@@ -28,6 +29,7 @@ let AC = document.getElementById('AC');
 
 function appendOne() {
     console.log('One pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '1' : currentNumber = currentNumber + '1';
     console.log('current number is: ' + currentNumber);
@@ -36,6 +38,7 @@ function appendOne() {
 
 function appendTwo() {
     console.log('two pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '2' : currentNumber = currentNumber + '2';
     console.log('current number is: ' + currentNumber);
@@ -44,6 +47,7 @@ function appendTwo() {
 
 function appendThree() {
     console.log('three pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '3' : currentNumber = currentNumber + '3';
     console.log('current number is: ' + currentNumber);
@@ -52,6 +56,7 @@ function appendThree() {
 
 function appendFour() {
     console.log('four pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '4' : currentNumber = currentNumber + '4';
     console.log('current number is: ' + currentNumber);
@@ -60,6 +65,7 @@ function appendFour() {
 
 function appendFive() {
     console.log('five pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '5' : currentNumber = currentNumber + '5';
     console.log('current number is: ' + currentNumber);
@@ -68,6 +74,7 @@ function appendFive() {
 
 function appendSix() {
     console.log('six pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '6' : currentNumber = currentNumber + '6';
     console.log('current number is: ' + currentNumber);
@@ -76,6 +83,7 @@ function appendSix() {
 
 function appendSeven() {
     console.log('seven pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '7' : currentNumber = currentNumber + '7';
     console.log('current number is: ' + currentNumber);
@@ -84,6 +92,7 @@ function appendSeven() {
 
 function appendEight() {
     console.log('eight pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '8' : currentNumber = currentNumber + '8';
     console.log('current number is: ' + currentNumber);
@@ -92,6 +101,7 @@ function appendEight() {
 
 function appendNine() {
     console.log('nine pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '9' : currentNumber = currentNumber + '9';
     console.log('current number is: ' + currentNumber);
@@ -100,6 +110,7 @@ function appendNine() {
 
 function appendZero() {
     console.log('zero pressed');
+    numberPressedChecks();
     lastPressType = 'number';
     currentNumber === '0' ? currentNumber = '0' : currentNumber = currentNumber + '0';
     console.log('current number is: ' + currentNumber);
@@ -107,6 +118,7 @@ function appendZero() {
 }
 
 function appendDecimalPoint() {
+    numberPressedChecks();
     lastPressType = 'number';
     if (!currentNumber.includes('.')) {
         currentNumber = currentNumber + '.';
@@ -151,12 +163,21 @@ function operationDivide() {
 }
 
 function equalsPressed() {
-    let answer = calculate(firstNumber, operation, currentNumber);
-    firstNumber = '0';
-    currentNumber = '0';
-    operation = 'none';
+    let answer;
+    if (lastPressType === 'operation') {
+        currentNumber = firstNumber;
+        answer = calculate(firstNumber, operation, currentNumber);
+    } else if (lastPressType === 'equals') {
+        answer = calculate(storedAnswer, operation, repeatEqualsModifier);
+    } else {
+        answer = calculate(firstNumber, operation, currentNumber);
+    }
+    repeatEqualsModifier = currentNumber;
+    //firstNumber = '0';
+    //currentNumber = '0';
+    //operation = 'none';
     lastPressType = 'equals';
-    display.innerHTML = answer;
+    answer < 99999999999 ? display.innerHTML = answer : display.innerHTML = answer.toExponential(5);
     storedAnswer = answer;
     colorsToDefault();
 }
@@ -183,7 +204,7 @@ function calculate(xAsString, toDo, yAsString) {
         case 'divide':
             return x / y;
         case 'none':
-            return 0;
+            return yAsString;
     }
 }
 
@@ -205,6 +226,13 @@ function operationPressedChecks() {
     } else if (lastPressType === 'number') {
         firstNumber = currentNumber;
         currentNumber = '0';
+    }
+}
+
+function numberPressedChecks() {
+    if (lastPressType === 'equals') {
+        currentNumber = '0';
+        firstNumber = '0';
     }
 }
 
