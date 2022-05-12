@@ -194,18 +194,24 @@ function ACPressed() {
 function calculate(xAsString, toDo, yAsString) {
     let x = parseFloat(xAsString);
     let y = parseFloat(yAsString);
+    let calculated;
     switch (toDo) {
         case 'add':
-            return x + y;
+            calculated = x + y;
+            break;
         case 'subtract':
-            return x - y;
+            calculated = x - y;
+            break;
         case 'multiply':
-            return x * y;
+            calculated = x * y;
+            break;
         case 'divide':
-            return x / y;
+            calculated = x / y;
+            break;
         case 'none':
             return yAsString;
     }
+    return parseFloat(calculated.toFixed(10));
 }
 
 function colorsToDefault() {
