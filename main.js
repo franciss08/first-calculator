@@ -191,6 +191,11 @@ function ACPressed() {
     colorsToDefault();
 }
 
+function clearDisplay() {
+    currentNumber = '0';
+    display.innerHTML = '0';
+}
+
 function calculate(xAsString, toDo, yAsString) {
     let x = parseFloat(xAsString);
     let y = parseFloat(yAsString);
@@ -261,3 +266,66 @@ divide.addEventListener('click', operationDivide);
 
 AC.addEventListener('click', ACPressed);
 equals.addEventListener('click', equalsPressed);
+
+//attempt to add keyboard control
+
+function keyPress (event) {
+    switch (event.key) {
+        case '1':
+            appendOne();
+            break;
+        case '2':
+            appendTwo();
+            break;
+        case '3':
+            appendThree();
+            break;
+        case '4':
+            appendFour();
+            break;
+        case '5':
+            appendFive();
+            break;
+        case '6':
+            appendSix();
+            break;
+        case '7':
+            appendSeven();
+            break;
+        case '8':
+            appendEight();
+            break;
+        case '9':
+            appendNine();
+            break;
+        case '0':
+            appendZero();
+            break;
+        case 'Delete':
+            ACPressed();
+            break;
+        case 'Backspace':
+            clearDisplay();
+            break;
+        case '=':
+        case 'Enter':
+            equalsPressed();
+            break;
+        case '+':
+            operationAdd();
+            break;
+        case '-':
+            operationSubtract();
+            break;
+        case '*':
+            operationMultiply();
+            break;
+        case '/':
+            operationDivide();
+            break;
+        default:
+
+    }
+}
+
+document.addEventListener('keydown', keyPress);
